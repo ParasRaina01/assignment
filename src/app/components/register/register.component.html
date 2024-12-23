@@ -1,22 +1,38 @@
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100">
-  <div class="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-xl w-full max-w-md">
-    <h2 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Create Account</h2>
-    
+<div
+  class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100"
+>
+  <div
+    class="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-xl w-full max-w-md"
+  >
+    <h2
+      class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+    >
+      Create Account
+    </h2>
+
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
       <div class="form-control">
         <label class="label">
           <span class="label-text text-gray-700 font-medium">Full Name</span>
         </label>
-        <input 
-          type="text" 
+        <input
+          type="text"
           formControlName="fullName"
-          class="input input-bordered w-full bg-white/50 border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all" 
-          [ngClass]="{'input-error border-red-300 focus:border-red-500 focus:ring-red-200': fullName.invalid && (fullName.dirty || fullName.touched)}"
+          class="input input-bordered w-full bg-white/50 border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+          [ngClass]="{
+            'input-error border-red-300 focus:border-red-500 focus:ring-red-200':
+              fullName.invalid && (fullName.dirty || fullName.touched),
+          }"
           placeholder="Enter your full name"
         />
-        <div *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="text-red-500 text-sm mt-1">
+        <div
+          *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)"
+          class="text-red-500 text-sm mt-1"
+        >
           <div *ngIf="fullName.errors?.['required']">Full name is required</div>
-          <div *ngIf="fullName.errors?.['minlength']">Full name must be at least 3 characters</div>
+          <div *ngIf="fullName.errors?.['minlength']">
+            Full name must be at least 3 characters
+          </div>
         </div>
       </div>
 
@@ -24,14 +40,20 @@
         <label class="label">
           <span class="label-text text-gray-700 font-medium">Email</span>
         </label>
-        <input  
-          type="email" 
+        <input
+          type="email"
           formControlName="email"
-          class="input input-bordered w-full bg-white/50 border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all" 
-          [ngClass]="{'input-error border-red-300 focus:border-red-500 focus:ring-red-200': email.invalid && (email.dirty || email.touched)}"
-          placeholder="Enter your email" 
+          class="input input-bordered w-full bg-white/50 border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+          [ngClass]="{
+            'input-error border-red-300 focus:border-red-500 focus:ring-red-200':
+              email.invalid && (email.dirty || email.touched),
+          }"
+          placeholder="Enter your email"
         />
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-red-500 text-sm mt-1">
+        <div
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+          class="text-red-500 text-sm mt-1"
+        >
           <div *ngIf="email.errors?.['required']">Email is required</div>
           <div *ngIf="email.errors?.['email']">Please enter a valid email</div>
         </div>
@@ -41,33 +63,62 @@
         <label class="label">
           <span class="label-text text-gray-700 font-medium">Password</span>
         </label>
-        <input 
-          type="password" 
+        <input
+          type="password"
           formControlName="password"
-          class="input input-bordered w-full bg-white/50 border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all" 
-          [ngClass]="{'input-error border-red-300 focus:border-red-500 focus:ring-red-200': password.invalid && (password.dirty || password.touched)}"
+          class="input input-bordered w-full bg-white/50 border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+          [ngClass]="{
+            'input-error border-red-300 focus:border-red-500 focus:ring-red-200':
+              password.invalid && (password.dirty || password.touched),
+          }"
           placeholder="Enter your password"
         />
-        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-red-500 text-sm mt-1">
+        <div
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+          class="text-red-500 text-sm mt-1"
+        >
           <div *ngIf="password.errors?.['required']">Password is required</div>
-          <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters</div>
+          <div *ngIf="password.errors?.['minlength']">
+            Password must be at least 6 characters
+          </div>
         </div>
       </div>
 
       <div class="form-control">
         <label class="label">
-          <span class="label-text text-gray-700 font-medium">Confirm Password</span>
+          <span class="label-text text-gray-700 font-medium"
+            >Confirm Password</span
+          >
         </label>
-        <input 
-          type="password" 
+        <input
+          type="password"
           formControlName="confirmPassword"
-          class="input input-bordered w-full bg-white/50 border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all" 
-          [ngClass]="{'input-error border-red-300 focus:border-red-500 focus:ring-red-200': (confirmPassword.invalid || registerForm.hasError('mismatch')) && (confirmPassword.dirty || confirmPassword.touched)}"
+          class="input input-bordered w-full bg-white/50 border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+          [ngClass]="{
+            'input-error border-red-300 focus:border-red-500 focus:ring-red-200':
+              (confirmPassword.invalid || registerForm.hasError('mismatch')) &&
+              (confirmPassword.dirty || confirmPassword.touched),
+          }"
           placeholder="Confirm your password"
         />
-        <div *ngIf="(confirmPassword.invalid || registerForm.hasError('mismatch')) && (confirmPassword.dirty || confirmPassword.touched)" class="text-red-500 text-sm mt-1">
-          <div *ngIf="confirmPassword.errors?.['required']">Confirm password is required</div>
-          <div *ngIf="confirmPassword.value.length > 0 && registerForm.hasError('mismatch')">Passwords do not match</div>
+        <div
+          *ngIf="
+            (confirmPassword.invalid || registerForm.hasError('mismatch')) &&
+            (confirmPassword.dirty || confirmPassword.touched)
+          "
+          class="text-red-500 text-sm mt-1"
+        >
+          <div *ngIf="confirmPassword.errors?.['required']">
+            Confirm password is required
+          </div>
+          <div
+            *ngIf="
+              confirmPassword.value.length > 0 &&
+              registerForm.hasError('mismatch')
+            "
+          >
+            Passwords do not match
+          </div>
         </div>
       </div>
 
@@ -75,8 +126,8 @@
         {{ errorMessage }}
       </div>
 
-      <button 
-        type="submit" 
+      <button
+        type="submit"
         class="btn w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-none shadow-lg hover:shadow-xl transition-all duration-200"
         [disabled]="registerForm.invalid"
       >
@@ -84,8 +135,13 @@
       </button>
 
       <div class="text-center text-gray-600">
-        Already have an account? 
-        <a routerLink="/login" routerLinkActive="active" class="text-purple-600 hover:text-purple-700 font-medium hover:underline cursor-pointer ml-1">Login</a>
+        Already have an account?
+        <a
+          routerLink="/login"
+          routerLinkActive="active"
+          class="text-purple-600 hover:text-purple-700 font-medium hover:underline cursor-pointer ml-1"
+          >Login</a
+        >
       </div>
     </form>
   </div>
