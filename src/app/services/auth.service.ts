@@ -39,7 +39,7 @@ export class AuthService {
 
       const newUser: User = {
         id: Math.random().toString(36).substr(2, 9),
-        fullName: userData.fullName,
+        fullName: userData?.fullName,
         email: userData.email,
         password: userData.password
       };
