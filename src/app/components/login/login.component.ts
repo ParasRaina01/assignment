@@ -18,7 +18,6 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  isLoading = false;
   errorMessage = '';
 
   constructor(
@@ -34,17 +33,14 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.isLoading = true;
       this.errorMessage = '';
 
       const { email, password } = this.loginForm.value;
 
       this.authService.login(email, password).subscribe({
         next: () => {
-          this.isLoading = false;
         },
-        error: (error) => {
-          this.isLoading = false;
+        error: (error) => { 
           this.errorMessage = error.message || 'Invalid email or password';
         },
       });

@@ -19,7 +19,6 @@ import { AuthService } from '../../services/auth.service';
 export class RegisterComponent {
   registerForm: FormGroup;
   errorMessage: string = '';
-  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -60,16 +59,13 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.isLoading = true;
       this.errorMessage = '';
 
       this.authService.register(this.registerForm.value).subscribe({
         next: () => {
-          this.isLoading = false;
           this.router.navigate(['/login']);
         },
         error: (error) => {
-          this.isLoading = false;
           this.errorMessage =
             error.message || 'Registration failed. Please try again.';
         },
