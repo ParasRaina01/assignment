@@ -38,9 +38,8 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
 
       this.authService.login(email, password).subscribe({
-        next: () => {
-        },
-        error: (error) => { 
+        next: () => {},
+        error: (error) => {
           this.errorMessage = error.message || 'Invalid email or password';
         },
       });

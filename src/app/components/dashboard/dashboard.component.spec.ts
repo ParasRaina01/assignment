@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { AuthService, User } from '../../services/auth.service';
@@ -11,7 +16,7 @@ describe('DashboardComponent', () => {
   let authService: jasmine.SpyObj<AuthService>;
   let router: jasmine.SpyObj<Router>;
   let currentUserSubject: BehaviorSubject<User | null>;
-  
+
   const mockUser: User = {
     fullName: 'Test User',
     email: 'testuser1@gmail.com',
@@ -21,10 +26,11 @@ describe('DashboardComponent', () => {
   beforeEach(async () => {
     currentUserSubject = new BehaviorSubject<User | null>(null);
 
-    authService = jasmine.createSpyObj('AuthService', 
+    authService = jasmine.createSpyObj(
+      'AuthService',
       ['isAuthenticated', 'logout'],
       {
-        currentUserValue: currentUserSubject.value
+        currentUserValue: currentUserSubject.value,
       }
     );
 
@@ -35,8 +41,8 @@ describe('DashboardComponent', () => {
       declarations: [],
       providers: [
         { provide: AuthService, useValue: authService },
-        { provide: Router, useValue: router }
-      ]
+        { provide: Router, useValue: router },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
@@ -60,7 +66,7 @@ describe('DashboardComponent', () => {
       authService.isAuthenticated.and.returnValue(true);
       currentUserSubject.next(mockUser);
       Object.defineProperty(authService, 'currentUserValue', {
-        get: () => currentUserSubject.value
+        get: () => currentUserSubject.value,
       });
       component.ngOnInit();
       tick();
@@ -80,7 +86,7 @@ describe('DashboardComponent', () => {
     it('should display user information when currentUser is set', () => {
       component.currentUser = mockUser;
       fixture.detectChanges();
-      
+
       const compiled = fixture.nativeElement;
       expect(compiled.textContent).toContain(mockUser.fullName);
       expect(compiled.textContent).toContain(mockUser.email);
@@ -89,7 +95,7 @@ describe('DashboardComponent', () => {
     it('should not display user information when currentUser is null', () => {
       component.currentUser = null;
       fixture.detectChanges();
-      
+
       const compiled = fixture.nativeElement;
       expect(compiled.textContent).not.toContain('Test User');
       expect(compiled.textContent).not.toContain('testuser1@gmail.com');

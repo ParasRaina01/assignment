@@ -9,15 +9,17 @@ describe('AuthGuard', () => {
   let router: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
-    const authServiceSpy = jasmine.createSpyObj('AuthService', ['isAuthenticated']);
+    const authServiceSpy = jasmine.createSpyObj('AuthService', [
+      'isAuthenticated',
+    ]);
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
       providers: [
         AuthGuard,
         { provide: AuthService, useValue: authServiceSpy },
-        { provide: Router, useValue: routerSpy }
-      ]
+        { provide: Router, useValue: routerSpy },
+      ],
     });
 
     guard = TestBed.inject(AuthGuard);
@@ -32,26 +34,26 @@ describe('AuthGuard', () => {
   describe('canActivate', () => {
     it('should return true for authenticated user', () => {
       authService.isAuthenticated.and.returnValue(true);
-      
+
       const result = guard.canActivate();
-      
+
       expect(result).toBeTrue();
       expect(router.navigate).not.toHaveBeenCalled();
     });
 
     it('should return false and redirect to login for unauthenticated user', () => {
       authService.isAuthenticated.and.returnValue(false);
-      
+
       const result = guard.canActivate();
-      
+
       expect(result).toBeFalse();
       expect(router.navigate).toHaveBeenCalledWith(['/login']);
     });
 
     it('should handle error in isAuthenticated', () => {
       authService.isAuthenticated.and.throwError('Authentication error');
-      
+
       expect(() => guard.canActivate()).toThrowError('Authentication error');
     });
   });
-}); 
+});
