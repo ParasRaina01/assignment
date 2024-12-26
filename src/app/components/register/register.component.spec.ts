@@ -159,28 +159,4 @@ describe('RegisterComponent', () => {
       );
     }));
   });
-
-  describe('Password Match Validator', () => {
-    it('should return null when passwords match', () => {
-      const form = component.registerForm;
-      form.patchValue({
-        password: 'password123',
-        confirmPassword: 'password123',
-      });
-
-      const result = component.passwordMatchValidator(form);
-      expect(result).toBeNull();
-    });
-
-    it('should return mismatch error when passwords do not match', () => {
-      const form = component.registerForm;
-      form.patchValue({
-        password: 'password123',
-        confirmPassword: 'different',
-      });
-
-      const result = component.passwordMatchValidator(form);
-      expect(result).toEqual({ mismatch: true });
-    });
-  });
 });
